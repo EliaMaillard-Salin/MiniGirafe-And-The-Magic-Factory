@@ -11,28 +11,32 @@ void MachineSelectPipe::Init(std::vector<std::vector<Tile*>> tiles, Machine* pMa
 		m_pTextTitle = m_pScene->CreateUIText();
 		m_pTextTitle->SetText("Choose The Pipe pos and direction");
 		m_pTextTitle->SetColor(sf::Color::White);
+		m_pTextTitle->SetOutline(sf::Color(0, 0, 0), 2);
 		SetPosOnCanva(0.5f * sf::Vector2f(GameManager::Get()->GetWindowSize()));
 		SetSpriteTexture("Selector");
 		SetLayer(2);
-		m_pTextTitle->SetPosOnCanva({ m_posOnCanva.x - (GetWidth() * 0.25f), m_posOnCanva.y - (GetHeight() * 0.5f) + 10.0f});
+		m_pTextTitle->SetPosOnCanva({ m_posOnCanva.x - (GetWidth() * 0.25f) + 85.f , m_posOnCanva.y - (GetHeight() * 0.5f) + 0.0f});
 
 		m_pClick = m_pScene->CreateUIText();
-		m_pClick->SetSize(15);
+		m_pClick->SetSize(19);
 		m_pClick->SetText("Choose The Tile with Left click");
 		m_pClick->SetColor(sf::Color::White);
-		m_pClick->SetPosOnCanva({ m_posOnCanva.x - (GetWidth() * 0.5f) + 10.0f, m_posOnCanva.y - 80.0f });
+		m_pClick->SetOutline(sf::Color(0, 0, 0), 1);
+		m_pClick->SetPosOnCanva({ m_posOnCanva.x - (GetWidth() * 0.25f) - 27.0f, m_posOnCanva.y + 110.f});
 		
 		m_pArrow = m_pScene->CreateUIText();
 		m_pArrow->SetText("Choose The direction with arrows");
 		m_pArrow->SetColor(sf::Color::White);
-		m_pArrow->SetSize(15);
-		m_pArrow->SetPosOnCanva({ m_posOnCanva.x - (GetWidth() * 0.5f) + 10.0f, m_posOnCanva.y - 60.0f });
+		m_pArrow->SetOutline(sf::Color(0, 0, 0), 1);
+		m_pArrow->SetSize(19);
+		m_pArrow->SetPosOnCanva({ m_posOnCanva.x - (GetWidth() * 0.25f)  - 10.5f, m_posOnCanva.y +130.0f });
 		
 		m_pEnter = m_pScene->CreateUIText();
 		m_pEnter->SetText("Confirm with Enter");
 		m_pEnter->SetColor(sf::Color::White);
-		m_pEnter->SetSize(15);
-		m_pEnter->SetPosOnCanva({ m_posOnCanva.x - (GetWidth() * 0.5f) + 10.0f, m_posOnCanva.y -  40.0f });
+		m_pEnter->SetOutline(sf::Color(0, 0, 0), 1);
+		m_pEnter->SetSize(19);
+		m_pEnter->SetPosOnCanva({ m_posOnCanva.x - (GetWidth() * 0.25f)  - 25.0f, m_posOnCanva.y +150.0f });
 	}
 
 	m_pTextTitle->Draw();

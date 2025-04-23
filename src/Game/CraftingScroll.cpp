@@ -91,6 +91,7 @@ bool CraftingScroll::UnlockMachine(CRAFTABLE_OBJECT type)
 
 bool CraftingScroll::CheckIfHasProp(CRAFTABLE_OBJECT type, int unlock)
 {
+	return true;
 }
 
 CraftingScroll::CraftingScroll()

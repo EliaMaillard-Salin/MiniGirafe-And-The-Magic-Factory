@@ -28,9 +28,11 @@ class SceneTest : public Scene
 	Pipe* m_pPipe = nullptr;
 	DecantingMachine* m_pDecant = nullptr;
 
-	RessourcesSpawner* m_pSpawner = nullptr;
+	RessourcesSpawner* m_pSpawnerWood = nullptr;
+	RessourcesSpawner* m_pSpawnerPlant = nullptr;
 
 	//
+	Scene* m_pPauseScene = nullptr;
 
 	Map* m_pMap = nullptr;
 	MachineSelectPipe* m_machineSelectPipe = nullptr;
@@ -75,6 +77,8 @@ public:
 	int GetTileCount();
 	Grimoire* GetGrimoire();
 	Inventory* GetInventory();
+
+	void SetSceneMenu(Scene* pScene);
 
 	void OpenSelectPipeMenu(std::vector<std::vector<Tile*>> tiles, Machine* pMachine);
 

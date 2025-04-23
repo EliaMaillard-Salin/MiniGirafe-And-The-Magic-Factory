@@ -37,7 +37,7 @@ int PotionRecipe::GetTimeToDecant(POTION_TYPES potion)
 
 void DecantingMachine::Init()
 {
-	SetSpriteTexture("DecantingMachine");
+	SetSpriteTexture("Machine/DecantingMachine");
 	Machine::Init(2, 2);
 
 	sf::Vector2u winSize = GameManager::Get()->GetWindowSize();

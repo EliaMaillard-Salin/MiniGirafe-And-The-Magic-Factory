@@ -52,6 +52,8 @@ protected:
     int m_currentFrameIndex = 0; 
     float m_currentFrameTime = 0.0f;
 
+    bool m_isAnimationActive = false;
+
     bool m_toDestroy = false;
     
     bool m_isActive = true;
@@ -147,6 +149,9 @@ public:
 	
     bool PlayAnimation(const char* animationName);
     void StopAnimation();
+
+    bool SmoothPlayAnimation(const char* animationName);
+    void SmoothStopAnimation();
 
     template<typename T>
     T* CreateEntity();

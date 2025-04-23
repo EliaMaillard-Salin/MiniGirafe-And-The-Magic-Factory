@@ -26,6 +26,8 @@ class GameManager
 
 	sf::RenderWindow* m_pWindow;
 
+	bool m_isRunning = true;
+
 	sf::View m_cameraCustom = {};
 	bool m_useCustomCamera = false;
 	bool m_viewHastoBeUpdated = false;
@@ -63,6 +65,8 @@ private:
 	void SetDeltaTime(float deltaTime) { mDeltaTime = deltaTime; }
 	void UpdateTickEvent();
 
+	bool IsRunning();
+
 public:
 	~GameManager();
 	static GameManager* Get();
@@ -93,6 +97,8 @@ public:
 	sf::Vector2i GetMousePosCenter();
 
 	sf::Vector2u GetWindowSize();
+
+	void Quit();
 
 	friend Debug;
 	friend Scene;

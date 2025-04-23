@@ -95,6 +95,11 @@ sf::Vector2u GameManager::GetWindowSize()
 	return m_pWindow->getSize();
 }
 
+void GameManager::Quit()
+{
+	m_isRunning = false;
+}
+
 
 void GameManager::Run()
 {
@@ -108,7 +113,7 @@ void GameManager::Run()
 
 	sf::Clock clock;
 	
-	while (m_pWindow->isOpen())
+	while (IsRunning())
 	{
 		float dt = clock.restart().asSeconds();
 		SetDeltaTime(dt);
@@ -123,7 +128,6 @@ void GameManager::Run()
 
 		m_accumulatedTime += dt;
 		m_tickTimeElapsed += dt;
-		//m_checkfpsTime += dt;
 
 		HandleEvent();
 
@@ -137,13 +141,6 @@ void GameManager::Run()
 
 		m_pActiveScene->m_fps = 1/dt;
 
-	/*	while (m_checkfpsTime >= 1.f)
-		{
-			m_pActiveScene->m_fps = m_fps;
-			m_fps -= m_fps;
-			m_checkfpsTime -= 1.f;
-		}*/
-
 		if (m_accumulatedTime > FIXED_DT)
 		{
 			
@@ -154,7 +151,6 @@ void GameManager::Run()
 		
 		Draw();
 
-		// ADD "TickManager"
 	}
 
 	m_pWindow->close();
@@ -232,4 +228,9 @@ void GameManager::UpdateViewCamera()
 void GameManager::UpdateTickEvent()
 {
 	m_pActiveScene->CallTickEvent();
+}
+
+bool GameManager::IsRunning()
+{
+	return m_pWindow->isOpen() && m_isRunning;
 }

@@ -38,7 +38,13 @@ void SceneTest::LoadAssets()
 
 	AssetManager::LoadSpriteSheet("Machine/WoodFarmer-Sheet", 12, 1536, 128, 1, 12);
 
+
 	AnimationManager::CreateAnimation("WoodFarmerFarming", "Machine/WoodFarmer-Sheet", 0, 12);
+
+	AssetManager::LoadSpriteSheet("Machine/PlantFarmer-Sheet", 23, 2944, 128, 1, 23);
+
+
+	AnimationManager::CreateAnimation("PlantFarmerFarming", "Machine/PlantFarmer-Sheet", 0, 23);
 
 	std::string jsonFilepath = "../../res/Prefab_Map/PrefabSpawner.json";
 	std::ifstream jsonFile(jsonFilepath);
@@ -103,6 +109,7 @@ void SceneTest::OnInitialize()
 
 	m_pPlayer = CreateEntity<Player>();
 	m_pPlayer->Init();
+	m_pPlayer->SetPosition(64.f * 30.f, 64.f * 30.f);
 
 	m_pFpstext = CreateUIText();
 	m_pFpstext->SetSize(20);
@@ -110,12 +117,13 @@ void SceneTest::OnInitialize()
 
 	m_pGrimoire->CloseGrimoire();
 
-	m_pPipe = CreateEntity<Pipe>();
-	m_pPipe->Init();
+	m_pSpawnerWood = CreateEntity<RessourcesSpawner>();
+	m_pSpawnerWood->Init(this,2, 2, RESSOURCES_TYPES::TREE, RESSOURCES_BIOMES::PLAINS, RESSOURCES_RANK::RANK_1);
+	m_pSpawnerWood->SetPositionInWorld(sf::Vector2i(2,2), sf::Vector2i(2, 2));
 
-	m_pSpawner = CreateEntity<RessourcesSpawner>();
-	m_pSpawner->Init(this,2, 2, RESSOURCES_TYPES::TREE, RESSOURCES_BIOMES::PLAINS, RESSOURCES_RANK::RANK_1);
-	m_pSpawner->SetPositionInWorld(sf::Vector2i(0, 0), sf::Vector2i(2, 2));
+	m_pSpawnerPlant = CreateEntity<RessourcesSpawner>();
+	m_pSpawnerPlant->Init(this, 2, 2, RESSOURCES_TYPES::PLANT, RESSOURCES_BIOMES::PLAINS, RESSOURCES_RANK::RANK_1);
+	m_pSpawnerPlant->SetPositionInWorld(sf::Vector2i(2, 2), sf::Vector2i(8, 3));
 }
 
 void SceneTest::OnUpdate()
@@ -142,6 +150,11 @@ Grimoire* SceneTest::GetGrimoire()
 Inventory* SceneTest::GetInventory()
 {
 	return m_pInventory;
+}
+
+void SceneTest::SetSceneMenu(Scene* pScene)
+{
+	m_pPauseScene = pScene;
 }
 
 void SceneTest::OpenSelectPipeMenu(std::vector<std::vector<Tile*>> tiles, Machine* pMachine)
@@ -172,34 +185,55 @@ void SceneTest::OnEvent(std::optional<sf::Event> pEvent)
 			m_pGrimoire->PreviousPage();
 		}
 
+		//if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::A)
+		//{
+		//	m_pInventory->AddElementInInventory(m_pProp, 1);
+		//}
+		//if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::R)
+		//{
+		//	m_pInventory->RemoveElementInInventory(m_pProp, 1);
+		//}
+
+
 		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::A)
 		{
-			m_pInventory->AddElementInInventory(m_pProp, 1);
+			Pipe* pPipe = CreateEntity<Pipe>();
+			pPipe->Init(Pipe::UP, Pipe::LEFT);
 		}
-		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::R)
+		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::T)
 		{
-			m_pInventory->RemoveElementInInventory(m_pProp, 1);
+			Pipe* pPipe = CreateEntity<Pipe>();
+			pPipe->Init(Pipe::UP, Pipe::RIGHT);
 		}
-		if (pEvent->getIf<sf::Event:: KeyPressed>()->code == sf::Keyboard::Key::P)
+
+		if (pEvent->getIf<sf::Event:: KeyPressed>()->code == sf::Keyboard::Key::C)
 		{
 			Pipe* pPipe = CreateEntity<Pipe>();
 			pPipe->Init();
 		}
-		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::O)
-		{
-			Pipe* pPipe = CreateEntity<Pipe>();
-			pPipe->Init(Pipe::RIGHT,Pipe::UP);
-		}
 
-		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::H)
-		{
-			m_pPipe->ReceiveProp(m_pProp);
-		}
-		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::M)
+		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::W)
 		{
 			WoodFarmer* pWoodFarmer = CreateEntity<WoodFarmer>();
 			pWoodFarmer->Init(2,2);
 		}
+
+		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::X)
+		{
+			PlantFarmer* pPlantFarmer = CreateEntity<PlantFarmer>();
+			pPlantFarmer->Init(2, 2);
+		}
+		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::M)
+		{
+			m_pDecant = CreateEntity<DecantingMachine>();
+			m_pDecant->Init();
+		}
+
+		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Escape)
+		{
+			GameManager::Get()->SetActiveScene(m_pPauseScene);
+		}
+
 
 	}
 }

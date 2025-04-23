@@ -384,6 +384,7 @@ bool Entity::PlayAnimation(const char* animationName)
 		m_currentFrameIndex = 0;
 		m_currentFrameTime = 0.f;
 		m_pCurrentAnimation->PlayAnimation(m_pSprite);
+		m_isAnimationActive = true;
 		return true;
 	}
 	return false;
@@ -392,6 +393,24 @@ bool Entity::PlayAnimation(const char* animationName)
 void Entity::StopAnimation()
 {
 	m_pCurrentAnimation = nullptr;
+}
+
+bool Entity::SmoothPlayAnimation(const char* animationName)
+{
+	if (m_isAnimationActive != true)
+	{
+		PlayAnimation(animationName);
+		return true;
+	}
+	return false;
+}
+
+void Entity::SmoothStopAnimation()
+{
+	if (m_currentFrameIndex == 0) {
+		m_pCurrentAnimation = nullptr;
+		m_isAnimationActive = false;
+	}
 }
 
 void Entity::DisplayEntity()

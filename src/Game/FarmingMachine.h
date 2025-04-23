@@ -43,6 +43,9 @@ class PlantFarmer : public Machine
 {
 
 private:
+	int m_maxitemcount = 5;
+
+
 	int m_itemCount = 0;
 
 	int m_speedInTick = 5;

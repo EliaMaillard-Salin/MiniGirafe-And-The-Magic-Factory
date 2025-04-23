@@ -64,6 +64,13 @@ void Text::SetColor(sf::Color color)
 	m_pText->setFillColor(color);
 }
 
+void Text::SetOutline(sf::Color color , int thickness)
+{
+	m_pText->setOutlineColor(color);
+	m_pText->setOutlineThickness(thickness);
+
+}
+
 void Text::Destroy()
 {
 	m_pScene->DeleteText(this);

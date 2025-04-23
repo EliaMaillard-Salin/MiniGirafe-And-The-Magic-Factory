@@ -10,7 +10,7 @@ int main()
 	
 	pInstance->CreateNewWindow(1920, 1080, "Test",5000);
 
-	pInstance->LaunchScene<SceneTest>();
+	pInstance->LaunchScene<SceneMenu>();
 
 	return 0;
 }

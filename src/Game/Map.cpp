@@ -10,7 +10,7 @@ void Map::Init(Scene* pScene, Entity* tileover, int rows, int cols, int tileCoun
         {
             m_chunks[i][j] = pScene->CreateEntity<Chunk>();
             m_chunks[i][j]->m_pMap = this;
-            m_chunks[i][j]->SetPosition(i* (70.0f * tileCountInChunk), j* (70.0f * tileCountInChunk),0.f,0.0f);
+            m_chunks[i][j]->SetPosition(i* (64.0f * tileCountInChunk), j* (64.0f * tileCountInChunk),0.f,0.0f);
             m_chunks[i][j]->Init(tileCountInChunk, tileover);
             m_chunks[i][j]->m_posInList = sf::Vector2i(i, j);
         }

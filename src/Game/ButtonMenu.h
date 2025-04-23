@@ -24,7 +24,7 @@ public:
 
 	void Init(std::string text);
 
-	void OnClick() override {};
+	void OnClick() override;
 };
 
 class SettingsButton : public Button

@@ -20,6 +20,7 @@ WoodFarmer::WoodFarmer()
 void WoodFarmer::Init(int widht, int height)
 {
 	Machine::Init(widht, height);
+	m_pProp = new WoodLog();
 	m_hasTickEvent = true;
 }
 
@@ -46,6 +47,12 @@ void WoodFarmer::MachineEffect()
 		if (m_itemCount < m_maxitemcount) {
 			m_itemCount += 1; // Farm
 			std::cout << "CutWood" << std::endl;
+			SmoothPlayAnimation("WoodFarmerFarming");
+			m_pSprite->setPosition(m_pTileOfMachine->GetObjectOnTile()->GetPosition(0, 0));
+
+		}
+		else {
+			SmoothStopAnimation();
 		}
 	}
 	
@@ -135,7 +142,6 @@ bool PlantFarmer::CheckPlaceCondition(Tile* pTile)
 
 PlantFarmer::PlantFarmer()
 {
-	SetSpriteTexture("Machine/PlantFarmer");
 }
 
 void PlantFarmer::Init(int widht, int height)
@@ -145,13 +151,21 @@ void PlantFarmer::Init(int widht, int height)
 	m_hasTickEvent = true;
 }
 
+
 void PlantFarmer::MachineEffect()
 {
 	if (m_speedInTick <= 0)
 	{
-		m_speedInTick = 5;
-		m_itemCount += 1; // Farm
-		std::cout << "Harvest" << std::endl;
+		if (m_itemCount < m_maxitemcount) {
+			m_speedInTick = 5;
+			m_itemCount += 1; // Farm
+			std::cout << "Harvest" << std::endl;
+			SmoothPlayAnimation("PlantFarmerFarming");
+			m_pSprite->setPosition(m_pTileOfMachine->GetObjectOnTile()->GetPosition(0, 0));
+		}
+		else {
+			SmoothStopAnimation();
+		}
 	}
 
 	for (Pipe* pPipe : m_listOutPipes)
@@ -160,7 +174,7 @@ void PlantFarmer::MachineEffect()
 		{
 			sf::Vector2f pipepos = pPipe->GetPosition();
 			MovingItem* movingitem = CreateEntity<MovingItem>();
-			movingitem->Init("woodMovingItem", pipepos.x, pipepos.y, pPipe);
+			movingitem->Init("plantMovingItem", pipepos.x, pipepos.y, pPipe);
 			pPipe->ReceiveProp(m_pProp);
 			m_itemCount -= 1;
 		}
@@ -199,7 +213,9 @@ void PlantFarmer::PlaceObject()
 	}
 
 	GetScene<SceneTest>()->OpenSelectPipeMenu(m_machineTiles, this);
-	SetSpriteTexture("Machine/PlantFarmer");
+	PlayAnimation("PlantFarmerFarming");
+	m_pSprite->setPosition(m_pTileOfMachine->GetObjectOnTile()->GetPosition(0, 0));
+	m_isDrawable = true;
 }
 
 void PlantFarmer::SetPipe(int pipeID, sf::Vector2i pipeTilePos, int pipeSide)

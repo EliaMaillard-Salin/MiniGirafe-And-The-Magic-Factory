@@ -18,6 +18,7 @@ SceneMenu::~SceneMenu()
 void SceneMenu::OnInitialize()
 {
 	m_pPlayScene = GameManager::Get()->CreateScene<SceneTest>();
+	m_pPlayScene->SetSceneMenu(this);
 	m_pTitle = CreateUIText();
 	m_pTitle->SetText("MINI GIRAFE AND THE MAGIC FACTORY");
 	m_pTitle->SetColor(sf::Color::Black);

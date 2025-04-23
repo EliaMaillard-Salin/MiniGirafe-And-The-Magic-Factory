@@ -47,6 +47,7 @@ public:
 	void SetSize(int size);
 
 	void SetColor(sf::Color color);
+	void SetOutline(sf::Color color, int thickness = 1);
 
 	void Destroy();
 

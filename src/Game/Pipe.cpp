@@ -57,15 +57,15 @@ void Pipe::Init(IN_OUT_SIDE in, IN_OUT_SIDE out)
 		m_listcolliders.push_back(c3);
 
 	}
-	else if(((m_inSide < m_outSide) && (m_inSide != 0) && (m_outSide != 3)) || m_inSide == 3){ //L 
+	else if(((m_inSide < m_outSide) || (m_inSide == 3) && (m_outSide == 0)) && !((m_inSide == 0) && (m_outSide == 3))){ //L 
 		PipeCollider* c1 = CreateEntity<PipeCollider>();
 		c1->Init(this, -16, -8, 1, 48, true);
 		PipeCollider* c2 = CreateEntity<PipeCollider>();
 		c2->Init(this, 8, 16, 48, 1, true);
 		PipeCollider* c3 = CreateEntity<PipeCollider>();
-		c3->Init(this, 24, -32, 1, 16, true);
+		c3->Init(this, 16, -24, 1, 16, true);
 		PipeCollider* c4 = CreateEntity<PipeCollider>();
-		c4->Init(this, 32, -24, 16, 1, true);
+		c4->Init(this, 24, -16, 16, 1, true);
 		PipeCollider* c5 = CreateEntity<PipeCollider>();
 		c5->Init(this, 32, 0, 1, 32, false);
 

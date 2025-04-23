@@ -43,6 +43,11 @@ void QuitButton::Init(std::string text)
 	m_pTitle->Draw();
 }
 
+void QuitButton::OnClick()
+{
+	GameManager::Get()->Quit();
+}
+
 SettingsButton::~SettingsButton()
 {
 	if (m_pTitle != nullptr)
