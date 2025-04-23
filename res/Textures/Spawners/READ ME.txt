@@ -1,0 +1,22 @@
+
+    enum CHUNK_TYPE
+    {
+        PLAINS,
+        FOREST,
+        MOUNTAINS,
+        VOLCAN,
+        NONE,
+    };
+
+	enum PLANT_TYPE : int
+	{
+		RANK_1,
+		RANK_2,
+		RANK_3,
+	};
+
+NAME : 
+
+"Prop Type"_"Biome Type"_"Plant Rank"
+Exemple :
+Plant_0_0 (Plant, biome plane, rank 1)

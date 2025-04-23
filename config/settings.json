@@ -1,0 +1,46 @@
+{
+    "projects": {
+        "Engine": {
+            "additionalDependencies": [
+            ],
+            "additionalIncludeDirectories": [
+            ],
+            "additionalLibraryDirectories": [
+            ],
+            "dependencies": [],
+            "dependents": [
+                "Game"
+            ],
+            "guid": "052B7814-530B-4540-4AC3-358914392854",
+            "lib": true,
+            "pch": false,
+            "preprocessorDefinitions": [
+            ],
+            "vcpkg": true,
+            "window": false
+        },
+        "Game": {
+            "additionalDependencies": [
+            ],
+            "additionalIncludeDirectories": [
+            ],
+            "additionalLibraryDirectories": [
+            ],
+            "dependencies": [
+                "Engine"
+            ],
+            "dependents": [],
+            "guid": "46904AA7-2190-6778-1949-0EE80BC23F3F",
+            "lib": false,
+            "pch": true,
+            "preprocessorDefinitions": [
+            ],
+            "vcpkg": true,
+            "window": false
+        }
+    },
+    "solution_guid": "45F36B54-0C08-4799-0B4E-2EA5442D641C",
+    "solution_name": "LeJeu",
+    "startup_project": "Game",
+    "version": "1.17.4"
+}

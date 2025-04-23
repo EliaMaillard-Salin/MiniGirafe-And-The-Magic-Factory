@@ -1,0 +1,22 @@
+{
+
+    "ResTypeCount" : 3,
+    "BiomesCount" : 4,
+    "RankCount" : 3,
+    "SpawnersCount" : 2,
+    "AllSpawners" : 
+    [
+        {
+            "resType": "PLANT",
+            "Biome" : "PLAINS",
+            "rank" : "RANK_1",
+            "Prop" : "TREFLE"
+        },
+        {
+            "resType": "PLANT",
+            "Biome" : "PLAINS",
+            "rank" : "RANK_2",
+            "Prop" : "MILLEPERTUIS"
+        }
+    ]
+}

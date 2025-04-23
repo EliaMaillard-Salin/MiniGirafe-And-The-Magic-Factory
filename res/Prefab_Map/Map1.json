@@ -1,0 +1,12 @@
+{
+    "ChunkCount" : 16,
+    "ChunkList" :
+    {
+        "Chunk1" :
+        {
+            "Type":0,
+            "TileCount" : 15,
+            "Tiles" :[ 1,2,3,4]
+        } 
+    }
+}
