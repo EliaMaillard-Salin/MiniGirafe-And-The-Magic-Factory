@@ -7,6 +7,8 @@ using json = nlohmann::json;
 
 #include "SceneTest.h"
 
+#include "ScenePause.h"
+
 #include "Player.h"
 
 #include "Grimoire.h"
@@ -91,6 +93,9 @@ void SceneTest::OnInitialize()
 	m_machineSelectPipe = CreateEntity<MachineSelectPipe>();
 	SetMaxLayer(6);
 
+	m_pPauseMenu = GameManager::Get()->CreateScene<ScenePause>();
+	m_pPauseMenu->SetGameScene(this);
+	
 	m_pPotionSelector = CreateEntity<PotionSelector>();
 	m_pPotionSelector->Init();
 	m_pPotionSelector->AddAvailablePotion(POTION_TYPES::LUCK_I);
@@ -130,6 +135,36 @@ void SceneTest::OnUpdate()
 {
 	m_pFpstext->SetText(std::to_string(m_fps));
 	m_pFpstext->Draw();
+}
+
+void SceneTest::PauseGame()
+{
+	if (m_onPause)
+	{
+		return;
+	}
+
+	GameManager::Get()->SetActiveScene(m_pPauseMenu);
+
+	m_onPause = true; 
+}
+
+void SceneTest::UnpauseGame()
+{
+	if (m_onPause == false)
+	{
+		return;
+	}
+
+	GameManager::Get()->SetActiveScene(this);
+	GameManager::Get()->UnloadScene(m_pPauseMenu);
+
+	m_onPause = false;
+}
+
+void SceneTest::SwitchScene()
+{
+	GameManager::Get()->SetActiveScene(m_pPauseScene);
 }
 
 Tile* SceneTest::GetTileOver()
@@ -231,10 +266,8 @@ void SceneTest::OnEvent(std::optional<sf::Event> pEvent)
 
 		if (pEvent->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Escape)
 		{
-			GameManager::Get()->SetActiveScene(m_pPauseScene);
+			PauseGame();
 		}
-
-
 	}
 }
 

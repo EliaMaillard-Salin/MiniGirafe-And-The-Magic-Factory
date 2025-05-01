@@ -312,6 +312,9 @@ void DecantingMachine::SetPipe(int pipeID, sf::Vector2i pipeTilePos, int pipeSid
 
 void DecantingMachine::DrawUI()
 {
+	if (m_onGround == false)
+		return;
+
 	m_pText->Draw();
 
 	m_wasCollidingLastFrame = true; 

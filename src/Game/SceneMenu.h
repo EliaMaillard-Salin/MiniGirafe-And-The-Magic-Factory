@@ -8,7 +8,7 @@ class SceneTest;
 
 class SceneMenu : public Scene
 {
-	UIText* m_pTitle = nullptr;;
+	UIText* m_pTitle = nullptr;
 	PlayButton* m_pPlay = nullptr;
 	SettingsButton* m_pSettigns = nullptr;
 	QuitButton* m_pQuit = nullptr;

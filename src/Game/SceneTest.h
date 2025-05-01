@@ -18,6 +18,7 @@ class RessourcesSpawner;
 class PotionSelector;
 class RessourcesProp;
 class DecantingMachine;
+class ScenePause;
 
 class SceneTest : public Scene
 {
@@ -31,8 +32,12 @@ class SceneTest : public Scene
 	RessourcesSpawner* m_pSpawnerWood = nullptr;
 	RessourcesSpawner* m_pSpawnerPlant = nullptr;
 
+	ScenePause* m_pPauseMenu = nullptr;
+
 	//
 	Scene* m_pPauseScene = nullptr;
+
+	bool m_onPause = false;
 
 	Map* m_pMap = nullptr;
 	MachineSelectPipe* m_machineSelectPipe = nullptr;
@@ -72,6 +77,11 @@ public:
 	void OnInitialize() override;
 	void OnUpdate() override;
 	void OnFixedUpdate() override {};
+
+	void PauseGame();
+	void UnpauseGame();
+
+	void SwitchScene();
 
 	Tile* GetTileOver();
 	int GetTileCount();

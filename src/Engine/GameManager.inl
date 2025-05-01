@@ -15,7 +15,7 @@ void GameManager::LaunchScene()
 	newScene->LoadAssets();
 	newScene->OnInitialize();
 	m_sceneList.push_back(newScene);
-
+	LoadScene(newScene);
 	Run();
 }
 

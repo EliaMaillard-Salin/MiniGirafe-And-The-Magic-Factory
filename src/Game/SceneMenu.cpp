@@ -54,4 +54,5 @@ void SceneMenu::OnInitialize()
 void SceneMenu::SwitchScene()
 {
 	GameManager::Get()->SetActiveScene(m_pPlayScene);
+	GameManager::Get()->UnloadScene(this);
 }

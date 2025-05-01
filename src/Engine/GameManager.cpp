@@ -34,6 +34,23 @@ void GameManager::CreateNewWindow(unsigned int width, unsigned int height, const
 
 }
 
+void GameManager::LoadScene(Scene* pScene)
+{
+	if (pScene->m_isLoaded == false)
+	{
+		m_loadedScene.push_back(pScene);
+		pScene->m_isLoaded = true;
+	}
+}
+
+void GameManager::UnloadScene(Scene* pScene)
+{
+	if (pScene->m_isLoaded == true)
+	{
+		m_loadedScene.remove(pScene);
+		pScene->m_isLoaded = false;
+	}
+}
 
 GameManager::~GameManager()
 {
@@ -129,6 +146,8 @@ void GameManager::Run()
 		m_accumulatedTime += dt;
 		m_tickTimeElapsed += dt;
 
+		CheckScene();
+
 		HandleEvent();
 
 		if (m_tickTimeElapsed >= TICK_TIME)
@@ -155,6 +174,17 @@ void GameManager::Run()
 
 	m_pWindow->close();
 
+}
+
+void GameManager::CheckScene()
+{
+	if (m_changeActiveScene)
+	{
+		m_pActiveScene = m_pNewActiveScene;
+		LoadScene(m_pActiveScene);
+		m_pNewActiveScene = nullptr;
+		m_changeActiveScene = false;
+	}
 }
 
 void GameManager::HandleEvent()
@@ -184,14 +214,6 @@ void GameManager::HandleEvent()
 
 void GameManager::Update()
 {
-	if (m_changeActiveScene)
-	{	
-		//m_pActiveScene->UnloadScene();
-		m_pActiveScene = m_pNewActiveScene;
-		m_pNewActiveScene = nullptr;
-		m_changeActiveScene = false;
-	}
-	
 	m_pActiveScene->Update();
 }
 
@@ -207,7 +229,8 @@ void GameManager::Draw()
 	m_pWindow->clear(m_pActiveScene->m_backGroundColor);
 	
 	UpdateViewCamera();
-	m_pActiveScene->Draw(m_pWindow);
+	for (Scene* pScene : m_loadedScene)
+		pScene->Draw(m_pWindow);
 
 	m_pWindow->display();
 }

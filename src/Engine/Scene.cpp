@@ -254,12 +254,13 @@ void Scene::Draw(sf::RenderWindow* pWindow)
 			pWindow->draw(*(pText->m_pText));
 	}
 
+
+	m_uiCanva.Draw();
+
 	for (Shape* pShape : m_shapes) {
 		if (pShape->m_isDrawable)
 			pWindow->draw(*(pShape->GetShape()));
 	}
-
-	m_uiCanva.Draw();
 
 	for (UIText* pText : m_UITexts) {
 		if (pText->m_isDrawable)
@@ -282,6 +283,7 @@ void Scene::UpdateUIElements()
 
 void Scene::CallTickEvent()
 {
+	OnTickEvent();
 	for (auto it = m_allEntities.begin(); it != m_allEntities.end(); ++it)
 	{
 		Entity* pEntity = *it;

@@ -31,6 +31,9 @@ private:
 	bool m_toDestroy = false;
 
 protected:
+
+	bool m_isLoaded = false;
+
 	std::list<Entity*> m_entitiesToDestroy = {};
 	std::list<Entity*> m_entitiesToAdd = {};
 
@@ -55,6 +58,8 @@ protected:
 
 	sf::Color m_backGroundColor = sf::Color::Black;
 
+	bool m_onPause = false;
+
 private:
 	
 	void Update();
@@ -75,6 +80,7 @@ protected:
 	virtual void OnInitialize() {};
 	virtual void OnUpdate() {};
 	virtual void OnFixedUpdate() {};
+	virtual void OnTickEvent() {};
 
 	void DeleteScene();
 

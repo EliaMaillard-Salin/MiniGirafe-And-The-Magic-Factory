@@ -36,6 +36,7 @@ class GameManager
 
 	std::list<Scene*> m_sceneList = {};
 	std::list<Scene*> m_sceneToDestroy = {};
+	std::list<Scene*> m_loadedScene = {};
 
 	float mDeltaTime;
 
@@ -67,6 +68,8 @@ private:
 
 	bool IsRunning();
 
+	void CheckScene();
+
 public:
 	~GameManager();
 	static GameManager* Get();
@@ -88,6 +91,9 @@ public:
 
 	void UseCustomCamera();
 	void UseDefaultCamera();
+
+	void LoadScene(Scene* pScene);
+	void UnloadScene(Scene* pScene);
 
 	template<typename T>
 	T* CreateScene();
